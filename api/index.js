@@ -28,7 +28,7 @@ mongoose.connect(process.env.DB_URL, {
 
 // global middlewares
 app.use(cors({
-  origin: ['https://twigg.store','https://stitchax.netlify.app']
+  origin: ['https://twigg.store','https://stitchax.netlify.app','https://stitchaxapi.onrender.com']
 }))
 app.use(express.json())
 app.use(handleMalformedJson) // handle common req errors
