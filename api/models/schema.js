@@ -3,6 +3,7 @@ const { Joi } = require('celebrate')
 const MIN_PASSWORD_LENGTH = 6
 const ID_LENGTH = 24
 const ALLOWED_ORDER_STATUS = ['pending', 'shipped', 'in transit', 'delivered']
+const ALLOWED_SIZES=["S","M","L","XL","XXL"];
 
 module.exports = {
 	auth: {
@@ -85,6 +86,7 @@ module.exports = {
 				Joi.object().keys({
 					productID: Joi.string().length(ID_LENGTH).alphanum().required(),
 					quantity: Joi.number().positive(),
+					size:Joi.string().valid(...ALLOWED_SIZES),
 				}).required(),
 			).single(),
 		}),
@@ -93,12 +95,14 @@ module.exports = {
 				Joi.object().keys({
 					productID: Joi.string().length(ID_LENGTH).alphanum().required(),
 					quantity: Joi.number().positive(),
+					size:Joi.string().valid(...ALLOWED_SIZES),
 				}).required(),
 			).single(),
 		}),
 		patch: Joi.object().keys({
 			productID: Joi.string().length(ID_LENGTH).alphanum().required(),
 			quantity: Joi.number().integer().min(0),
+			size:Joi.string().valid(...ALLOWED_SIZES),
 		}),
 	},
 }
