@@ -62,11 +62,15 @@ module.exports = {
 				Joi.object().keys({
 					productID: Joi.string().length(ID_LENGTH).alphanum().required(),
 					quantity: Joi.number().positive(),
+					size:Joi.string().valid(...ALLOWED_SIZES)
 				}).required(),
 			).single().min(1),
 			amount: Joi.number().positive().required(),
 			address: Joi.any().required(),
 			status: Joi.string().valid(...ALLOWED_ORDER_STATUS),
+			razorOrderId:Joi.string().required(),
+			razorPaymentId:Joi.string().required(),
+
 		}),
 		update: Joi.object().keys({
 			products: Joi.array().items(
@@ -78,6 +82,9 @@ module.exports = {
 			amount: Joi.number().positive(),
 			address: Joi.any(),
 			status: Joi.string().valid(...ALLOWED_ORDER_STATUS),
+			razorOrderId:Joi.string().required(),
+			razorPaymentId:Joi.string().required(),
+
 		}),
 	},
 	cart: {

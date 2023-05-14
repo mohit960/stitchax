@@ -39,14 +39,16 @@ router.post("/",
 	verifyToken, 
 	celebrate({ body: orderSchema.new }),
 	async (req, res) => {
-	const { products, amount, address } = req.body
-
+	const { products, amount, address , razorOrderId,razorPaymentId } = req.body
+console.log('req.user',req.user.uid);
 	try {
 		const order = await Order.create({ 
 			userID: ObjectId(req.user.uid),
 			products,
 			amount,
 			address,
+			razorOrderId,
+			razorPaymentId
 		})
 		return res.json({
 			...orderResponse.orderCreated,

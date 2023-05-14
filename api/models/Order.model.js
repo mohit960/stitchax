@@ -33,6 +33,12 @@ const OrderSchema = new mongoose.Schema({
 		type: String,
 		default: "pending",
 	},
+	razorOrderId:{
+		type:String
+	},
+	razorPaymentId:{
+		type:String
+	}
 }, 
 	{timestamps: true}
 )
