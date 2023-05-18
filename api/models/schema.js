@@ -9,12 +9,9 @@ module.exports = {
 	auth: {
 		login: Joi.object().keys({
 			email: Joi.string().email().required(),
-			password: Joi.string().required(),
 		}),
 		register: Joi.object().keys({
-			fullname: Joi.string().required(),
 			email: Joi.string().email().required(),
-			password: Joi.string().min(MIN_PASSWORD_LENGTH).required(),
 		}),
 	},
 	user: {
@@ -35,22 +32,36 @@ module.exports = {
 		new: Joi.object().keys({
 			title: Joi.string().required(),
 			description: Joi.string().required(),
-			image: Joi.string().uri().required(),
+			image: Joi.array().items(Joi.string().uri().required()).single(),
 			price: Joi.number().positive().required(),
 			inStock: Joi.boolean(),
 			categories: Joi.array().items(Joi.string()).single(),
 			size: Joi.array().items(Joi.string()).single(),
 			color: Joi.array().items(Joi.string()).single(),
+			review: Joi.array().items(
+				Joi.object().keys({
+					title: Joi.string().alphanum(),
+					description: Joi.string().alphanum(),
+					rating:Joi.number().positive(),
+				}),
+			).single(),
 		}),
 		update: Joi.object().keys({
 			title: Joi.string(),
 			description: Joi.string(),
-			image: Joi.string().uri(),
+			image: Joi.array().items(Joi.string().uri().required()).single(),
 			price: Joi.number().positive(),
 			inStock: Joi.boolean(),
 			categories: Joi.array().items(Joi.string()).single(),
 			size: Joi.array().items(Joi.string()).single(),
 			color: Joi.array().items(Joi.string()).single(),
+			review: Joi.array().items(
+				Joi.object().keys({
+					title: Joi.string().alphanum(),
+					description: Joi.string().alphanum(),
+					rating:Joi.number().positive(),
+				}),
+			).single(),
 		}),
 	},
 	order: {

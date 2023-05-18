@@ -9,14 +9,14 @@ const { auth: authSchema } = require("../models/schema")
 router.post("/register", 
 	celebrate({body: authSchema.register}), 
 	async (req, res) => {
-	const { fullname, email, password } = req.body
+	const {email} = req.body
 
 	try {
-		const passwordHash = await bcrypt.hash(password, 10)
+	
 		await User.create({ 
-			fullname, 
-			email, 
-			password: passwordHash 
+		
+			email,
+			
 		})
 		res.status(201).json(authResponse.userCreated)
 
@@ -29,14 +29,15 @@ router.post("/register",
 router.post("/login", 
 	celebrate({ body: authSchema.login }), 
 	async (req, res) => {
-	const { email, password } = req.body
+	const { email } = req.body
 
 	const user = await User.findOne({ email })
 	if (!user) {
-		return res.status(401).json(authResponse.loginFailed)
+	
+		res.status(201).json(authResponse.loginFailed)
 	}
 
-	const isValidLogin = await bcrypt.compare(password, user.password)
+	const isValidLogin = user?true:false;
 	if (isValidLogin) {
 		const jwtToken = jwt.sign(
 			{
@@ -46,14 +47,11 @@ router.post("/login",
 			process.env.JWT_SECRET,
 			{expiresIn: "3d"},
 		)
-
-		return res.json({ 
-			...authResponse.loginSuccess,
-			accessToken: jwtToken,
-		})
-	} else {
-		return res.status(401).json(authResponse.loginFailed)
-	}
+		
+	return res.json({ 
+		...authResponse.loginSuccess,
+		accessToken: jwtToken,
+	})}
 })
 
 const authResponse = {
