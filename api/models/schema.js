@@ -40,13 +40,15 @@ module.exports = {
 			color: Joi.array().items(Joi.string()).single(),
 			review: Joi.array().items(
 				Joi.object().keys({
-					title: Joi.string().alphanum(),
-					description: Joi.string().alphanum(),
+					title: Joi.string(),
+					description: Joi.string(),
 					rating:Joi.number().positive(),
 				}),
-			).single(),
+			),
 		}),
 		update: Joi.object().keys({
+			_id:Joi.string(),
+			updatedAt:Joi.string(),
 			title: Joi.string(),
 			description: Joi.string(),
 			image: Joi.array().items(Joi.string().uri().required()).single(),
@@ -57,11 +59,22 @@ module.exports = {
 			color: Joi.array().items(Joi.string()).single(),
 			review: Joi.array().items(
 				Joi.object().keys({
-					title: Joi.string().alphanum(),
-					description: Joi.string().alphanum(),
+					_id:Joi.string(),
+					title: Joi.string(),
+					description: Joi.string(),
 					rating:Joi.number().positive(),
 				}),
-			).single(),
+			),
+		}),
+		patch: Joi.object().keys({
+			
+			review: Joi.array().items(
+				Joi.object().keys({
+					title: Joi.string(),
+					description: Joi.string(),
+					rating:Joi.number().positive(),
+				}),
+			),
 		}),
 	},
 	order: {
@@ -76,7 +89,7 @@ module.exports = {
 					size:Joi.string().valid(...ALLOWED_SIZES)
 				}).required(),
 			).single().min(1),
-			amount: Joi.number().positive().required(),
+			amount: Joi.number().required(),
 			address: Joi.any().required(),
 			status: Joi.string().valid(...ALLOWED_ORDER_STATUS),
 			razorOrderId:Joi.string().required(),

@@ -4,9 +4,9 @@ const ObjectId = mongoose.Schema.ObjectId
 
 const OrderSchema = new mongoose.Schema({
 	userID: {
-		type: ObjectId,
+		type: ObjectId ,
 		ref: 'User',
-		required: true,
+		
 	},
 	products: [
 		{

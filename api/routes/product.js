@@ -3,6 +3,7 @@ const { celebrate } = require('celebrate')
 
 const Product = require("../models/Product.model")
 const { product: productSchema } = require('../models/schema')
+const ObjectId = require("mongoose").Types.ObjectId
 const { 
 	verifyToken,
 	verifyAuthorization,
@@ -89,6 +90,26 @@ router.get("/:id", async (req, res) => {
 		const product = await Product.findById(req.params.id)
 		return res.json(product)
 
+	} catch (err) {
+		console.error(err)
+		return res.status(500).json(productResponse.unexpectedError)
+	}
+})
+
+
+
+
+router.post("/reviews/:id",
+	celebrate({ body: productSchema.update }),
+  async (req, res) => {
+	try {
+		await Product.findByIdAndUpdate(
+			req.params.id,
+			{$set: req.body },
+			{new: true},
+		)
+		return res.json(productResponse.productUpdated)
+		
 	} catch (err) {
 		console.error(err)
 		return res.status(500).json(productResponse.unexpectedError)

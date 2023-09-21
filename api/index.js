@@ -8,7 +8,7 @@ const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user') 
 const productRouter = require('./routes/product') 
 const cartRouter = require('./routes/cart') 
-const orderRouter = require('./routes/order')
+const orderRouter = require('./routes/order');
 const checkoutRouter = require('./routes/checkout')
 const { 
   handleMalformedJson,
@@ -31,7 +31,7 @@ mongoose.connect(process.env.DB_URL, {
 
 // global middlewares
 app.use(cors({
-  origin: ['https://twigg.store','https://stitchax.netlify.app',"http://localhost:3000"]
+  origin: ['https://twigg.store','https://stitchax.netlify.app',"http://localhost:3000","https://www.ethnikaa.com"]
 }))
 app.use(express.json())
 app.use(handleMalformedJson) // handle common req errors
