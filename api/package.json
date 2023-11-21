@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.2",
     "nodemailer": "^6.9.7",
+    "pnpm": "^8.10.5",
     "razorpay": "^2.8.6",
     "stripe": "^8.183.0",
     "webpack": "^5.82.0",
