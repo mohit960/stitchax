@@ -54,25 +54,12 @@ router.put("/:id",
 	verifyAuthorization, 
 	celebrate({ body: userSchema.update }),
 	async (req, res) => {
-	let { currentPassword, newPassword, fullname } = req.body
-
-	// reset password
-	let password
-	if (newPassword) { 
-		const user = await User.findById(req.params.id)
-		const isValid = await bcrypt.compare(currentPassword, user.password)
-
-		if (isValid) {
-			password = await bcrypt.hash(newPassword, 10)
-		} else {
-			return res.status(401).json(userResponse.userUpdateFailed)
-		}
-	}
+	let { wallet} = req.body
 
 	try {
 		await User.findByIdAndUpdate(
 			req.params.id,
-			{$set: { fullname, password } },
+			{$set: { wallet } },
 			{new: true},
 		)
 		return res.json(userResponse.userUpdated)

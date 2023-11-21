@@ -18,14 +18,11 @@ const CartSchema = new mongoose.Schema({
 			quantity: { 
 				type: Number, 
 				default: 1,
-			},
-			size: { 
-				type: String, 
-				default: "L",
-				required:true
-			},
+			}
+			
 		},
 	],
+
 
 }, 
 	{timestamps: true}

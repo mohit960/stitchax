@@ -16,6 +16,7 @@ router.post("/register",
 		await User.create({ 
 		
 			email,
+			count:0
 			
 		})
 		res.status(201).json(authResponse.userCreated)
@@ -39,6 +40,7 @@ router.post("/login",
 
 	const isValidLogin = user?true:false;
 	if (isValidLogin) {
+		console.log('useeee',user);
 		const jwtToken = jwt.sign(
 			{
 				uid: user._id,
@@ -46,6 +48,12 @@ router.post("/login",
 			}, 
 			process.env.JWT_SECRET,
 			{expiresIn: "3d"},
+		)
+		User.updateOne(
+			{_id:user._id},
+			{$inc:{count:1}},
+			(updatedData=>{})
+
 		)
 		
 	return res.json({ 

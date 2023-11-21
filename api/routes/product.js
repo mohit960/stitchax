@@ -21,12 +21,23 @@ router.get("/",
 		if (query.new) {
 			products = await Product.find().sort({ createdAt: -1 }).limit(5)
 
-		} else if (query.category) {
+		} else if (query.category && query.page) {
+			const page = query.page || 0;
+        const limit = 12;
 			products = await Product.find({
 				categories: { $in: [query.category]}
+			}) .skip((page-1) * limit)
+            .limit(limit);
+
+		} 
+		else if (query.search ) {
+			products = await Product.find({
+				productCode: { $in: [query.search]}
 			})
 
-		} else {
+		}
+		
+		else {
 			products = await Product.find()
 		}
 		return res.json(products)
@@ -36,6 +47,28 @@ router.get("/",
 		return res.status(500).json(productResponse.unexpectedError)
 	}
 })
+
+router.get("/count", 
+	
+	async (req, res) => {
+	
+	
+		const query = req.query;
+		
+			const count = await Product.find({
+				categories: { $in: [query.category]}
+			}).countDocuments();
+console.log('counttttt',count);
+		
+
+	
+		
+		
+		
+		return res.json({count:count})
+
+	} 
+)
 
 // Add a new product - admin only
 router.post("/", 
