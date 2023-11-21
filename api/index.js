@@ -46,7 +46,7 @@ app.post("/mail/send", (req, res) => {
     host: process.env.HOSTNAME,
     port: 587,
     auth: {
-        user: process.env.USERNAME,
+        user: process.env.USERSMTP,
         pass: process.env.SMTPPASS,
     },
 });
