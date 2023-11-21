@@ -42,6 +42,7 @@ const { createTransport } = require('nodemailer');
 
 app.post("/mail/send", (req, res) => {
   const { email,value } = req.body
+  console.log('swfwer',process.env.USERSMTP, process.env.SMTPPASS ,process.env.HOSTNAME)
   const transporter = createTransport({
     host: process.env.HOSTNAME,
     port: 587,
