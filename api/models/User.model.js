@@ -6,6 +6,14 @@ const userSchema = new mongoose.Schema({
 		required: true,
 		unique: true,
 	},
+	wallet:{
+type:Number,
+default:0,
+	},
+	count:{
+		type:Number,
+		default:1,
+	},
 	isAdmin: {
 		type: Boolean,
 		default: false,

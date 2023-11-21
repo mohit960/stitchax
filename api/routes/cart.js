@@ -44,6 +44,7 @@ router.post("/",
 
 // Reset a cart - any authenticated user
 router.post("/clear", verifyToken, async (req, res) => {
+	console.log('aaaaaa',req.user.uid);
 	try {
 		await Cart.updateOne(
 			{userID: ObjectId(req.user.uid)},

@@ -1,7 +1,8 @@
 const router = require("express").Router()
 const ObjectId = require('mongoose').Types.ObjectId
 const { celebrate } = require('celebrate')
-
+const Product=require('../models/Product.model')
+const User=require('../models/User.model')
 const Order = require("../models/Order.model")
 const { order: orderSchema } = require('../models/schema')
 const { 
@@ -36,20 +37,45 @@ router.get("/",
 
 // Create a new order - authenticated user
 router.post("/", 
-	verifyToken, 
+
 	celebrate({ body: orderSchema.new }),
 	async (req, res) => {
-	const { products, amount, address , razorOrderId,razorPaymentId } = req.body
-console.log('req.user',req.user.uid);
+	const { products, amount, address , razorOrderId,razorPaymentId,userId , to , from , cardType } = req.body
+let order={};
+console.log('req.user.id',userId);
 	try {
-		const order = await Order.create({ 
-			userID: ObjectId(req.user.uid),
+		if(userId!=="GUEST"){
+			console.log('dddjdhdhdh',userId, amount);
+		order = await Order.create({ 
+			userID: ObjectId(userId),
 			products,
 			amount,
 			address,
 			razorOrderId,
-			razorPaymentId
+			razorPaymentId,
+			to,from,cardType
 		})
+	}
+	else{
+		order=await Order.create({ 
+			products,
+			amount,
+			address,
+			razorOrderId,
+			razorPaymentId,
+			to,from,cardType
+		})
+	
+	}
+
+	products.forEach(p=>{
+		Product.updateOne(
+			{_id:p.productID},
+			{$inc:{stock:-p.quantity}},
+			(updatedData=>{})
+
+		)
+	})
 		return res.json({
 			...orderResponse.orderCreated,
 			orderID: order._id,
@@ -104,6 +130,32 @@ router.get("/:id", verifyToken, async (req, res) => {
 				userID: ObjectId(req.user.uid),
 			})
 		}
+
+		if (!order) {
+			return res.status(404).json(orderResponse.orderNotFound)
+		} 
+		order = await order.populate({
+			path: "products.productID",
+			select: ["title", "price", "image"],
+		})
+		return res.json({status: "ok", order})
+
+	} catch (err) {
+		console.error(err)
+		return res.status(500).json(orderResponse.unexpectedError)
+	}
+})
+
+router.get("/guest/:id",  async (req, res) => {
+	// cannot use 'verifyAuthorization' due to 'id' being 'orderID' here
+	try {
+		let order
+
+		order = await Order.findOne({
+			_id: ObjectId(req.params.id),
+			
+		
+		})
 
 		if (!order) {
 			return res.status(404).json(orderResponse.orderNotFound)

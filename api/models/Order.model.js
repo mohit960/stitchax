@@ -25,10 +25,50 @@ const OrderSchema = new mongoose.Schema({
 		type: Number,
 		required: true,
 	},
-	address: { 
-		type: Object, 
-		required: true,
-	},
+	address: [
+		{
+			name: {
+				type: String,
+				
+				required: true,
+			}, 
+			address1: {
+				type: String,
+				
+				required: true,
+			},
+			address2: {
+				type: String,
+				
+				
+			},
+			city: {
+				type: String,
+				
+				required: true,
+			},
+			email: {
+				type: String,
+				
+				required: true,
+			},
+			phone: {
+				type: Number,
+				
+				required: true,
+			},
+			state: {
+				type: String,
+				
+				required: true,
+			},
+			zipcode: {
+				type: Number,
+				
+				required: true,
+			},
+		},
+	],
 	status: {
 		type: String,
 		default: "pending",
@@ -37,6 +77,13 @@ const OrderSchema = new mongoose.Schema({
 		type:String
 	},
 	razorPaymentId:{
+		type:String
+	},
+	to:{
+		type:String
+	},from:{
+		type:String
+	},cardType:{
 		type:String
 	}
 }, 
