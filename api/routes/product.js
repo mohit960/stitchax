@@ -16,12 +16,14 @@ router.get("/",
 	celebrate({ query: productSchema.query }),
 	async (req, res) => {
 	const query = req.query
+	console.log('query',query);
 	try {
 		let products 
-		if (query.new) {
-			products = await Product.find().sort({ createdAt: -1 }).limit(5)
+		// if (query.new) {
+		// 	products = await Product.find().sort({ createdAt: -1 }).limit(5)
 
-		} else if (query.category && query.page) {
+		// }
+		if (query.category && query.page) {
 			const page = query.page || 0;
         const limit = 12;
 			products = await Product.find({
@@ -39,6 +41,7 @@ router.get("/",
 		
 		else {
 			products = await Product.find()
+           ;
 		}
 		return res.json(products)
 
