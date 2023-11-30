@@ -106,8 +106,8 @@ module.exports = {
 			amount: Joi.any().required(),
 			address: Joi.any().required(),
 			status: Joi.string().valid(...ALLOWED_ORDER_STATUS),
-			razorOrderId:Joi.string().required(),
-			razorPaymentId:Joi.string().required(),
+			razorOrderId:Joi.string(),
+			razorPaymentId:Joi.string(),
 			userId:Joi.string(),to:Joi.string(),from:Joi.string(),cardType:Joi.string()
 
 		}),
@@ -121,8 +121,8 @@ module.exports = {
 			amount: Joi.number().positive(),
 			address: Joi.any(),
 			status: Joi.string().valid(...ALLOWED_ORDER_STATUS),
-			razorOrderId:Joi.string().required(),
-			razorPaymentId:Joi.string().required(),to:Joi.string(),from:Joi.string(),cardType:Joi.string()
+			razorOrderId:Joi.string(),
+			razorPaymentId:Joi.string(),to:Joi.string(),from:Joi.string(),cardType:Joi.string()
 
 		}),
 	},

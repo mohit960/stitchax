@@ -40,9 +40,23 @@ router.get("/",
 		}
 		
 		else {
-			products = await Product.find()
-           ;
+			products = await Product.find();
 		}
+		return res.json(products)
+
+	} catch (err) {
+		console.error(err)
+		return res.status(500).json(productResponse.unexpectedError)
+	}
+})
+
+router.get("/all", 
+	
+	async (req, res) => {
+	
+	try {
+		let products = await Product.find();
+		
 		return res.json(products)
 
 	} catch (err) {
