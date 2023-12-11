@@ -40,7 +40,7 @@ router.get("/",
 		}
 		
 		else {
-			products = await Product.find();
+			products = await Product.find().skip(10).limit(10);
 		}
 		return res.json(products)
 
