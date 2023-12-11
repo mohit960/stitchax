@@ -12,7 +12,7 @@ const {
 
 
 // Get all products - any user
-router.get("/", 
+router.get("/filtered", 
 	celebrate({ query: productSchema.query }),
 	async (req, res) => {
 	const query = req.query
@@ -50,12 +50,12 @@ router.get("/",
 	}
 })
 
-router.get("/all", 
+router.get("/", 
 	
 	async (req, res) => {
 	
 	try {
-		let products = await Product.find().skip(10).limit(10);
+		let products = await Product.find();
 		
 		return res.json(products)
 
