@@ -55,7 +55,7 @@ router.get("/all",
 	async (req, res) => {
 	
 	try {
-		let products = await Product.find().limit(10);
+		let products = await Product.find().skip(10).limit(10);
 		
 		return res.json(products)
 
