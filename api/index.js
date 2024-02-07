@@ -241,7 +241,7 @@ app.post("/capture/:paymentId", (req, res) => {
     return request(
      {
      method: "POST",
-     url: `https://rzp_test_80swUL1sWejR3W:Tc9pRdiXhMkHsbDbKJhUW4DZ@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,
+     url: `https://rzp_live_QXKUl2WxNIoch8:Tc9pRdiXhMkHsbDbKJhUW4DZ@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,
      form: {
         amount: 10 * 100, // amount == Rs 10 // Same As Order amount
         currency: "INR",
