@@ -201,8 +201,8 @@ transporter.sendMail(mailOptions, function(error, info){
 
 const Razorpay = require("razorpay");
 const instance = new Razorpay({
-    key_id: "rzp_test_80swUL1sWejR3W",
-    key_secret: "Tc9pRdiXhMkHsbDbKJhUW4DZ",
+    key_id: "rzp_live_QXKUl2WxNIoch8",
+    key_secret: "eTtn0ueUb8Fut6GVoLcB3bkC",
 });
 
 
@@ -218,7 +218,7 @@ app.get("/razor/order", (req, res) => {
       amount: 10 * 100, // amount == Rs 10
       currency: "INR",
       receipt: "receipt#1",
-      payment_capture: 0,
+      payment_capture: 1,
  // 1 for automatic capture // 0 for manual capture
     };
   instance.orders.create(options, async function (err, order) {
