@@ -100,7 +100,7 @@ module.exports = {
 				Joi.object().keys({
 					productID: Joi.string().length(ID_LENGTH).alphanum().required(),
 					quantity: Joi.number().positive(),
-					
+					size:Joi.any()
 				}).required(),
 			).single().min(1),
 			amount: Joi.any().required(),
@@ -110,21 +110,7 @@ module.exports = {
 			razorPaymentId:Joi.string(),
 			userId:Joi.string(),to:Joi.string(),from:Joi.string(),cardType:Joi.string()
 
-		}),
-		update: Joi.object().keys({
-			products: Joi.array().items(
-				Joi.object().keys({
-					productID: Joi.string().length(ID_LENGTH).alphanum().required(),
-					quantity: Joi.number().positive(),
-				}).required(),
-			).single(),
-			amount: Joi.number().positive(),
-			address: Joi.any(),
-			status: Joi.string().valid(...ALLOWED_ORDER_STATUS),
-			razorOrderId:Joi.string(),
-			razorPaymentId:Joi.string(),to:Joi.string(),from:Joi.string(),cardType:Joi.string()
-
-		}),
+		})
 	},
 	cart: {
 		new: Joi.object().keys({
@@ -133,7 +119,7 @@ module.exports = {
 					productID: Joi.string().length(ID_LENGTH).alphanum().required(),
 					quantity: Joi.number().positive(),
 					category:Joi.array().items(Joi.string()).single(),
-					
+					size:Joi.string(),
 				}).required(),
 			).single(),
 		}),
@@ -143,14 +129,15 @@ module.exports = {
 					productID: Joi.string().length(ID_LENGTH).alphanum().required(),
 					
 					category:Joi.array().items(Joi.string()).single(),
-					
+					size:Joi.string(),
 					quantity: Joi.number().positive(),
 				}).required(),
 			).single()
 		}),
 		patch: Joi.object().keys({
 			productID: Joi.string().length(ID_LENGTH).alphanum().required(),
-			quantity: Joi.number().integer().min(0)
+			quantity: Joi.number().integer().min(0),
+			size:Joi.string()
 		}),
 	},
 }

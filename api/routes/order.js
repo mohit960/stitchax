@@ -13,7 +13,7 @@ const {
 
 
 // Get all orders - admin only
-router.get("/", 
+router.get("/all", 
 	verifyAdminAccess, 
 	celebrate({ query: orderSchema.query }),
 	async (req, res) => {
@@ -38,7 +38,7 @@ router.get("/",
 // Create a new order - authenticated user
 router.post("/", 
 
-	celebrate({ body: orderSchema.new }),
+	celebrate({ body: orderSchema.new  }),
 	async (req, res) => {
 	const { products, amount, address , razorOrderId,razorPaymentId,userId , to , from , cardType } = req.body
 let order={};
@@ -173,10 +173,11 @@ router.get("/guest/:id",  async (req, res) => {
 })
 
 // Update an order - admin only
-router.put("/:id", 
+router.put("/update/:id", 
 	verifyAdminAccess, 
-	celebrate({ body: orderSchema.update }),
+	
 	async (req, res) => {
+		console.log('requw',req);
 	try {
 		await Order.findByIdAndUpdate(
 			req.params.id,
