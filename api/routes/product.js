@@ -16,7 +16,7 @@ router.get("/",
 	celebrate({ query: productSchema.query }),
 	async (req, res) => {
 	const query = req.query
-	console.log('query',query);
+	
 	try {
 		let products 
 		// if (query.new) {
@@ -25,7 +25,7 @@ router.get("/",
 		// }
 		if (query.category && query.page) {
 			const page = query.page || 0;
-        const limit = 12;
+        const limit =20;
 			products = await Product.find({
 				categories: { $in: [query.category]}
 			}) .skip((page-1) * limit)
@@ -75,7 +75,7 @@ router.get("/count",
 			const count = await Product.find({
 				categories: { $in: [query.category]}
 			}).countDocuments();
-console.log('counttttt',count);
+
 		
 
 	
@@ -137,7 +137,7 @@ router.delete("/:id", verifyAdminAccess, async (req, res) => {
 // Get any product - any user
 router.get("/:id", async (req, res) => {
 	try {
-		const product = await Product.findById(req.params.id)
+		const product = await Product.findById(req.params.id);
 		return res.json(product)
 
 	} catch (err) {
