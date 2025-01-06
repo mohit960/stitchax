@@ -24,7 +24,8 @@ router.get("/",
 
 		// }
 		if (query.category && query.page) {
-			const page = query.page || 0;
+			const page = query.page || 1;
+			console.log('pagagaga',page);
         const limit =20;
 			products = await Product.find({
 				categories: { $in: [query.category]}
