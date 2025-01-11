@@ -26,7 +26,7 @@ router.get("/",
 		if (query.category && query.page) {
 			const page = query.page || 1;
 			console.log('pagagaga',page);
-        const limit =20;
+        const limit =5;
 			products = await Product.find({
 				categories: { $in: [query.category]}
 			}) .skip((page-1) * limit)
