@@ -24,13 +24,18 @@ router.get("/",
 
 		// }
 		if (query.category && query.page) {
-			const page = query.page || 1;
-			console.log('pagagaga',page);
-        const limit =5;
-			products = await Product.find({
-				categories: { $in: [query.category]}
-			}) .skip((page-1) * limit)
-            .limit(limit);
+			const page = query.page ? parseInt(query.page) : 1;  // Ensure the page is a valid integer, default to 1 if not provided
+console.log('pagagaga', page);
+
+const limit = 10;  // Items per page
+const skip = (page - 1) * limit;  // Calculate how many documents to skip
+
+// Use the correct query to find products based on categories and pagination
+products = await Product.find({
+  categories: { $in: [query.category] }
+})
+  .skip(skip)  // Skip documents based on the current page
+  .limit(limit);  // Limit to the desired number of items per page
 
 		} 
 		else if (query.search ) {
