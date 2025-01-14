@@ -24,7 +24,7 @@ router.get("/",
 
 		// }
 		if (query.category && query.page) {
-			const page = query.page ? parseInt(query.page) : 1;  // Ensure the page is a valid integer, default to 1 if not provided
+			const page = query.page ?query.page : 1;  // Ensure the page is a valid integer, default to 1 if not provided
 console.log('pagagaga', page);
 
 const limit = 10;  // Items per page
