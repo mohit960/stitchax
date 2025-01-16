@@ -26,18 +26,16 @@ router.get("/",
 		if (query.category && query.page) {
 			const page = query.page ?query.page : 1;  // Ensure the page is a valid integer, default to 1 if not provided
 
+ // Items per page
 
-			
-const limit = 6;  // Items per page
+const skip = (page - 1) *6;  // Calculate how many documents to skip
 
-const skip = (page - 1) * limit;  // Calculate how many documents to skip
-console.log('limit',limit);
 // Use the correct query to find products based on categories and pagination
 products = await Product.find({
   categories: { $in: [query.category] }
 })
   .skip(skip)  // Skip documents based on the current page
-  .limit(limit);  // Limit to the desired number of items per page
+  .limit(6);  // Limit to the desired number of items per page
 
 		} 
 		else if (query.search ) {
