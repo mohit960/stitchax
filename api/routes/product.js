@@ -27,7 +27,9 @@ router.get("/",
 			const page = query.page ?query.page : 1;  // Ensure the page is a valid integer, default to 1 if not provided
 
 
+			
 const limit = 6;  // Items per page
+
 const skip = (page - 1) * limit;  // Calculate how many documents to skip
 console.log('limit',limit);
 // Use the correct query to find products based on categories and pagination
