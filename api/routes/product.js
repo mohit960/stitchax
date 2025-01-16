@@ -25,9 +25,9 @@ router.get("/",
 		// }
 		if (query.category && query.page) {
 			const page = query.page ?query.page : 1;  // Ensure the page is a valid integer, default to 1 if not provided
-console.log('pagagaga', page);
 
-const limit = 10;  // Items per page
+
+const limit = 6;  // Items per page
 const skip = (page - 1) * limit;  // Calculate how many documents to skip
 
 // Use the correct query to find products based on categories and pagination
