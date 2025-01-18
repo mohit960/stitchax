@@ -150,7 +150,7 @@ const instance = new Razorpay({
 app.get("/razor/order", (req, res) => {
   try {
     const options = {
-      amount: res.amount * 100, // amount == Rs 10
+      amount: req.amount * 100, // amount == Rs 10
       currency: "INR",
       receipt: "receipt#1",
       payment_capture: 1,
