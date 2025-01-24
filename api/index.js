@@ -53,7 +53,7 @@ app.post("/mail/send", (req, res) => {
 });
 
 const mailOptions = {
-    from: 'customersupport@ethnikaa.com',
+    from: 'care@blawesome.in',
     to: email,
     subject: `Otp to login to Blawesome`,
     text: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -92,7 +92,7 @@ app.post("/mail/sendOrder", (req, res) => {
 });
 
 const mailOptions = {
-    from: 'customersupport@ethnikaa.com',
+    from: 'care@blawesome.in',
     to: email,
     subject: `Order Trackink for Order ID: ${value}`,
     text: `<!DOCTYPE html PUBLIC >
