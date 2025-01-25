@@ -28,14 +28,14 @@ router.get("/",
 
  // Items per page
 
-const skip = (page - 1) *6;  // Calculate how many documents to skip
+const skip = (page - 1) *10;  // Calculate how many documents to skip
 
 // Use the correct query to find products based on categories and pagination
 products = await Product.find({
   categories: { $in: [query.category] }
 })
   .skip(skip)  // Skip documents based on the current page
-  .limit(6);  // Limit to the desired number of items per page
+  .limit(10);  // Limit to the desired number of items per page
 
 		} 
 		else if (query.search ) {

@@ -65,7 +65,7 @@ router.get("/:id", verifyAuthorization, async (req, res) => {
 		if (cart) {
 			cart = await cart.populate({
 				path: 'products.productID',
-				select: ['title','price','image']
+				select: ['title','price','image','discountedPrice']
 			})
 		}
 		return res.json(cart)
