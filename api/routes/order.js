@@ -174,8 +174,6 @@ router.get("/guest/:id",  async (req, res) => {
 
 // Update an order - admin only
 router.put("/update/:id", 
-	verifyAdminAccess, 
-	
 	async (req, res) => {
 		console.log('requw',req);
 	try {
